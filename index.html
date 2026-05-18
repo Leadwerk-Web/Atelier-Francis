@@ -25,10 +25,24 @@
                 <span></span>
             </button>
             <ul class="nav__links" id="navLinks">
-                <li><a href="#about">Über uns</a></li>
-                <li><a href="#impressions">Impressionen</a></li>
-                <li><a href="#classes">Kurse</a></li>
-                <li><a href="#team">Team</a></li>
+                <li><a href="ueber-uns.html">Über uns</a></li>
+                <li><a href="stundenplan.html">Stundenplan</a></li>
+                <li class="nav__item nav__item--has-sub">
+                    <a href="kursuebersicht.html" class="nav__link-parent">Kursübersicht</a>
+                    <ul class="nav__sub" role="list">
+                        <li><a href="kursuebersicht.html">Übersicht</a></li>
+                        <li><a href="kurs-kindertanz.html">Kreativer Kindertanz</a></li>
+                        <li><a href="kurs-ballett-kinder.html">Ballett Kinder &amp; Jugendliche</a></li>
+                        <li><a href="kurs-ballett-erwachsene.html">Ballett Erwachsene</a></li>
+                        <li><a href="kurs-modern-hip-hop.html">Modern &amp; Hip Hop</a></li>
+                        <li><a href="kurs-pilates.html">Pilates</a></li>
+                        <li><a href="kurs-choreo-fit.html">Choreo Fit</a></li>
+                        <li><a href="kurs-latino.html">Latino Style</a></li>
+                    </ul>
+                </li>
+                <li><a href="aktuelles.html">Aktuelles</a></li>
+                <li><a href="eindruecke.html">Eindrücke</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
                 <li><a href="#contact" class="nav__cta">Probestunde</a></li>
             </ul>
         </div>
@@ -37,7 +51,9 @@
     <!-- Hero / Entrée -->
     <section class="hero" id="hero">
         <div class="hero__bg">
-            <img src="Fotos/Hero2.png" alt="Atelier Francis" class="hero__img">
+            <video class="hero__video" autoplay muted loop playsinline poster="Fotos/Hero2.png" aria-hidden="true">
+                <source src="Fotos/Hero.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="hero__overlay"></div>
         <div class="hero__content">
@@ -303,7 +319,7 @@
                     <span class="section-label reveal">Galerie</span>
                     <h2 class="section-title section-title--light reveal">Impressionen</h2>
                 </div>
-                <a href="#gallery" class="impressions__cta btn btn--gold reveal">Zu unserer Bildergalerie</a>
+                <a href="eindruecke.html" class="impressions__cta btn btn--gold reveal">Zu unserer Bildergalerie</a>
             </div>
         </div>
         <div class="impressions__grid">
@@ -445,11 +461,25 @@
             <div class="footer__nav">
                 <h4 class="footer__heading">Navigation</h4>
                 <ul>
-                    <li><a href="#about">Über uns</a></li>
-                    <li><a href="#impressions">Impressionen</a></li>
-                    <li><a href="#classes">Kurse</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="stundenplan.html">Stundenplan</a></li>
+                    <li><a href="kursuebersicht.html">Kursübersicht</a></li>
+                    <li><a href="aktuelles.html">Aktuelles</a></li>
+                    <li><a href="eindruecke.html">Eindrücke</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="#contact">Probestunde</a></li>
+                </ul>
+            </div>
+            <div class="footer__courses">
+                <h4 class="footer__heading">Kurse</h4>
+                <ul>
+                    <li><a href="kurs-kindertanz.html">Kreativer Kindertanz</a></li>
+                    <li><a href="kurs-ballett-kinder.html">Ballett Kinder &amp; Jugendliche</a></li>
+                    <li><a href="kurs-ballett-erwachsene.html">Ballett Erwachsene</a></li>
+                    <li><a href="kurs-modern-hip-hop.html">Modern &amp; Hip Hop</a></li>
+                    <li><a href="kurs-pilates.html">Pilates</a></li>
+                    <li><a href="kurs-choreo-fit.html">Choreo Fit</a></li>
+                    <li><a href="kurs-latino.html">Latino Style</a></li>
                 </ul>
             </div>
             <div class="footer__contact">
@@ -457,7 +487,8 @@
                 <address>
                     Kronenstraße 22<br>
                     76275 Ettlingen<br><br>
-                    <a href="tel:+49721844283">0721 84 42 83</a>
+                    <a href="tel:+49721844283">0721 84 42 83</a><br>
+                    <a href="mailto:info@atelierfrancis.de">info@atelierfrancis.de</a>
                 </address>
             </div>
             <div class="footer__legal">
