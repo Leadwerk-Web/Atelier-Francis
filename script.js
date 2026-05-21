@@ -290,10 +290,15 @@
         });
     });
 
-    /* --- Galerie Lightbox (Eindrücke: page-gallery oder Impressionen-Raster) --- */
-    var galleryRoot = document.querySelector('.page-gallery');
-    var impressionsLight = document.querySelector('.impressions--light');
-    if (galleryRoot || impressionsLight) {
+    /* --- Galerie Lightbox (Kursgalerien, Eindrücke, Impressionen) --- */
+    (function initLightbox() {
+        var hasGallery =
+            document.querySelector('.page-gallery__trigger') ||
+            document.querySelector('.impressions__item') ||
+            document.querySelector('.course-page__mini-gallery figure');
+
+        if (!hasGallery) return;
+
         var lb = document.createElement('div');
         lb.className = 'lightbox';
         lb.setAttribute('role', 'dialog');
@@ -319,23 +324,48 @@
             lbImg.removeAttribute('src');
         }
 
-        if (galleryRoot) {
-            galleryRoot.querySelectorAll('.page-gallery__trigger').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var img = btn.querySelector('img');
-                    if (img && img.src) openLightbox(img.src, img.alt);
-                });
+        function bindImageTrigger(el, getImg) {
+            el.addEventListener('click', function () {
+                var img = getImg(el);
+                if (img && img.src) {
+                    openLightbox(img.currentSrc || img.src, img.alt);
+                }
+            });
+            el.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                var img = getImg(el);
+                if (img && img.src) {
+                    openLightbox(img.currentSrc || img.src, img.alt);
+                }
             });
         }
 
-        if (impressionsLight) {
-            impressionsLight.querySelectorAll('.impressions__item').forEach(function (item) {
-                item.addEventListener('click', function () {
-                    var img = item.querySelector('img');
-                    if (img && img.src) openLightbox(img.src, img.alt);
-                });
+        document.querySelectorAll('.page-gallery__trigger').forEach(function (btn) {
+            bindImageTrigger(btn, function (el) {
+                return el.querySelector('img');
             });
-        }
+        });
+
+        document.querySelectorAll('.impressions__item').forEach(function (item) {
+            bindImageTrigger(item, function (el) {
+                return el.querySelector('img');
+            });
+        });
+
+        document.querySelectorAll('.course-page__mini-gallery figure').forEach(function (figure) {
+            figure.setAttribute('tabindex', '0');
+            figure.setAttribute('role', 'button');
+            var img = figure.querySelector('img');
+            if (img && img.alt) {
+                figure.setAttribute('aria-label', img.alt + ' vergrößern');
+            } else {
+                figure.setAttribute('aria-label', 'Bild vergrößern');
+            }
+            bindImageTrigger(figure, function (el) {
+                return el.querySelector('img');
+            });
+        });
 
         lb.addEventListener('click', function (e) {
             if (e.target === lb || e.target === lbClose) closeLightbox();
@@ -344,9 +374,221 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lb.classList.contains('lightbox--open')) closeLightbox();
         });
-    }
+    })();
 
     /* --- Kontakt: Formular öffnet E-Mail-Programm (mailto) --- */
+    /* --- Kursseiten: Kurszeiten an Galerie oder Fließtext, „Mehr anzeigen“ --- */
+    function initCourseSchedulePanels() {
+        var sheets = document.querySelectorAll('.course-page__sheet');
+        if (!sheets.length) return;
+
+        var mobileQuery = window.matchMedia('(max-width: 1024px)');
+
+        sheets.forEach(function (sheet) {
+            var gallery = sheet.querySelector('.course-page__mini-gallery');
+            var aside = sheet.querySelector('.course-page__aside');
+            var main = sheet.querySelector('.course-page__main');
+            if (!aside || !main) return;
+
+            sheet.classList.toggle('course-page__sheet--no-gallery', !gallery);
+
+            var panels = Array.prototype.slice.call(
+                aside.querySelectorAll('.course-page__panel')
+            );
+            var schedulePanels = panels.filter(function (panel) {
+                var title = panel.querySelector('.course-page__panel-title');
+                return title && title.textContent.trim() !== 'Kursleitung';
+            });
+
+            if (!schedulePanels.length) return;
+
+            schedulePanels.forEach(function (panel, index) {
+                var list = panel.querySelector(':scope > .course-page__panel-list');
+                if (!list || list.closest('.course-page__schedule-wrap')) return;
+
+                panel.classList.add('course-page__panel--schedule');
+                if (index === 0 && gallery) {
+                    panel.classList.add('is-schedule-anchor');
+                }
+
+                var wrap = document.createElement('div');
+                wrap.className = 'course-page__schedule-wrap';
+                list.parentNode.insertBefore(wrap, list);
+                wrap.appendChild(list);
+                list.classList.add('course-page__schedule-list');
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'course-page__schedule-more';
+                btn.setAttribute('aria-expanded', 'false');
+                btn.textContent = 'Mehr anzeigen';
+                wrap.appendChild(btn);
+
+                btn.addEventListener('click', function () {
+                    var expanded = wrap.classList.toggle('is-expanded');
+                    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                    btn.textContent = expanded ? 'Weniger anzeigen' : 'Mehr anzeigen';
+                    if (expanded) {
+                        list.style.maxHeight = list.scrollHeight + 'px';
+                    } else {
+                        list.style.maxHeight = wrap.dataset.collapsedHeight + 'px';
+                    }
+                });
+            });
+
+            function getCollapsedListHeight(list, maxHeight) {
+                var items = list.querySelectorAll('li');
+                if (!items.length) return maxHeight;
+
+                list.style.maxHeight = 'none';
+                list.style.overflow = 'visible';
+
+                var listTop = list.getBoundingClientRect().top;
+                var fitHeight = 0;
+                var visibleCount = 0;
+
+                for (var i = 0; i < items.length; i++) {
+                    var itemBottom = items[i].getBoundingClientRect().bottom - listTop;
+                    if (itemBottom <= maxHeight + 1) {
+                        fitHeight = itemBottom;
+                        visibleCount++;
+                    } else {
+                        break;
+                    }
+                }
+
+                if (!visibleCount) {
+                    fitHeight = items[0].getBoundingClientRect().bottom - listTop;
+                }
+
+                return Math.ceil(fitHeight);
+            }
+
+            function getScheduleBudget() {
+                if (gallery) {
+                    return gallery.getBoundingClientRect().height;
+                }
+
+                var prose = main.querySelector('.course-page__prose');
+                if (!prose) {
+                    return main.getBoundingClientRect().height;
+                }
+
+                var proseBottom = prose.getBoundingClientRect().bottom;
+                var asideTop = aside.getBoundingClientRect().top;
+                var offset = 0;
+                var kursleitungPanel = aside.querySelector(
+                    '.course-page__panel:not(.course-page__panel--schedule)'
+                );
+
+                if (kursleitungPanel) {
+                    offset = kursleitungPanel.getBoundingClientRect().bottom - asideTop;
+                }
+
+                var actions = aside.querySelector('.course-page__aside-actions');
+                if (actions) {
+                    offset += actions.getBoundingClientRect().height + 16;
+                }
+
+                return Math.max(80, proseBottom - asideTop - offset);
+            }
+
+            function syncScheduleHeights() {
+                var budget = getScheduleBudget();
+                if (!budget) return;
+
+                var panelCount = schedulePanels.length;
+                var perPanel =
+                    panelCount > 1
+                        ? Math.max(80, Math.floor(budget / panelCount))
+                        : budget;
+
+                schedulePanels.forEach(function (panel) {
+                    var wrap = panel.querySelector('.course-page__schedule-wrap');
+                    var list = panel.querySelector('.course-page__schedule-list');
+                    var btn = panel.querySelector('.course-page__schedule-more');
+                    if (!wrap || !list || !btn) return;
+
+                    if (mobileQuery.matches) {
+                        wrap.classList.remove('is-collapsible', 'is-expanded');
+                        list.style.maxHeight = '';
+                        list.style.overflow = '';
+                        btn.hidden = false;
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.textContent = 'Mehr anzeigen';
+                        return;
+                    }
+
+                    var items = list.querySelectorAll('li');
+                    var collapsedHeight = getCollapsedListHeight(list, perPanel);
+                    var needsMore = items.length > 0 && collapsedHeight < list.scrollHeight - 1;
+
+                    wrap.dataset.collapsedHeight = String(collapsedHeight);
+                    var isExpanded = wrap.classList.contains('is-expanded');
+
+                    wrap.classList.toggle('is-collapsible', needsMore);
+
+                    if (!needsMore) {
+                        wrap.classList.remove('is-expanded');
+                        list.style.maxHeight = '';
+                        list.style.overflow = '';
+                        btn.hidden = true;
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.textContent = 'Mehr anzeigen';
+                        return;
+                    }
+
+                    list.style.overflow = 'hidden';
+                    btn.hidden = false;
+
+                    if (isExpanded) {
+                        list.style.maxHeight = list.scrollHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'true');
+                        btn.textContent = 'Weniger anzeigen';
+                    } else {
+                        list.style.maxHeight = collapsedHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.textContent = 'Mehr anzeigen';
+                    }
+                });
+            }
+
+            syncScheduleHeights();
+
+            if (gallery) {
+                gallery.querySelectorAll('img').forEach(function (img) {
+                    if (!img.complete) {
+                        img.addEventListener('load', syncScheduleHeights);
+                    }
+                });
+            }
+
+            if (typeof ResizeObserver !== 'undefined') {
+                var ro = new ResizeObserver(syncScheduleHeights);
+                if (gallery) {
+                    ro.observe(gallery);
+                } else {
+                    var prose = main.querySelector('.course-page__prose');
+                    ro.observe(prose || main);
+                }
+                ro.observe(aside);
+            }
+
+            window.addEventListener('resize', syncScheduleHeights);
+            if (mobileQuery.addEventListener) {
+                mobileQuery.addEventListener('change', syncScheduleHeights);
+            } else if (mobileQuery.addListener) {
+                mobileQuery.addListener(syncScheduleHeights);
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCourseSchedulePanels);
+    } else {
+        initCourseSchedulePanels();
+    }
+
     var reachForm = document.getElementById('reachForm');
     if (reachForm) {
         reachForm.addEventListener('submit', function (e) {

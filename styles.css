@@ -878,6 +878,13 @@ address {
     overflow: hidden;
 }
 
+.class-card__image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 0;
+}
+
 .class-card__image img {
     width: 100%;
     height: 100%;
@@ -887,7 +894,8 @@ address {
                 filter 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.class-card:hover .class-card__image img {
+.class-card:hover .class-card__image img,
+.class-card:hover .class-card__image-link img {
     filter: grayscale(0%);
     transform: scale(1.08);
 }
@@ -3507,7 +3515,7 @@ address {
     grid-template-rows: auto auto 1fr;
     column-gap: var(--space-2xl);
     row-gap: var(--space-sm);
-    align-items: start;
+    align-items: stretch;
 }
 
 .course-page__sheet-lead {
@@ -3530,12 +3538,13 @@ address {
 .course-page__sheet .course-page__aside {
     grid-column: 2;
     grid-row: 1 / -1;
-    align-self: start;
+    align-self: stretch;
     position: sticky;
     top: 7.5rem;
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
+    min-height: 0;
 }
 
 .course-page__sheet .course-page__main {
@@ -3543,6 +3552,21 @@ address {
     grid-row: 3;
     min-width: 0;
     padding-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.course-page__sheet--no-gallery {
+    align-items: start;
+}
+
+.course-page__sheet--no-gallery .course-page__main {
+    min-height: 0;
+}
+
+.course-page__sheet--no-gallery .course-page__aside {
+    align-self: start;
 }
 
 .course-page__main {
@@ -3557,7 +3581,12 @@ address {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-sm);
-    margin-top: var(--space-xl);
+    margin-top: auto;
+    padding-top: var(--space-xl);
+}
+
+.course-page__mini-gallery--quad {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .course-page__mini-gallery figure {
@@ -3565,6 +3594,12 @@ address {
     overflow: hidden;
     border: 1px solid var(--gray-100);
     background: var(--gray-100);
+    cursor: pointer;
+}
+
+.course-page__mini-gallery figure:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
 }
 
 .course-page__mini-gallery img {
@@ -3605,6 +3640,57 @@ address {
 
 .course-page__panel-list li + li {
     margin-top: 0.35em;
+}
+
+.course-page__panel--schedule {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.course-page__panel--schedule.is-schedule-anchor {
+    margin-top: auto;
+}
+
+.course-page__schedule-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.course-page__schedule-list {
+    margin: 0;
+    transition: max-height 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.course-page__schedule-wrap.is-collapsible .course-page__schedule-list {
+    overflow: hidden;
+}
+
+.course-page__schedule-more {
+    align-self: flex-start;
+    margin-top: var(--space-sm);
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--transition-fast);
+}
+
+.course-page__schedule-more:hover {
+    color: var(--gold-light);
+}
+
+.course-page__schedule-more:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
 }
 
 .course-page__panel-text {
@@ -3689,6 +3775,20 @@ address {
     .course-page__sheet .course-page__aside {
         position: static;
     }
+
+    .course-page__panel--schedule.is-schedule-anchor,
+    .course-page__sheet--no-gallery .course-page__panel--schedule {
+        margin-top: 0;
+    }
+
+    .course-page__schedule-wrap.is-collapsible .course-page__schedule-list {
+        max-height: none !important;
+        overflow: visible;
+    }
+
+    .course-page__schedule-more {
+        display: none !important;
+    }
 }
 
 @media (max-width: 640px) {
@@ -3696,7 +3796,7 @@ address {
         grid-template-columns: 1fr 1fr;
     }
 
-    .course-page__mini-gallery figure:last-child {
+    .course-page__mini-gallery:not(.course-page__mini-gallery--quad) figure:last-child {
         grid-column: 1 / -1;
     }
 }
