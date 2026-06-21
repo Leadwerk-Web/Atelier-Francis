@@ -376,6 +376,41 @@
         });
     })();
 
+    /* --- Eindrücke: Galerie nachladen --- */
+    (function initGalleryLoadMore() {
+        var grid = document.getElementById('galleryGrid');
+        var btn = document.getElementById('galleryLoadMore');
+        var wrap = document.getElementById('galleryLoadMoreWrap');
+        if (!grid || !btn) return;
+
+        var batch = parseInt(grid.getAttribute('data-batch') || '18', 10);
+        var deferred = Array.prototype.slice.call(
+            grid.querySelectorAll('.impressions__item--deferred')
+        );
+
+        function activateItem(item) {
+            item.classList.remove('impressions__item--deferred');
+        }
+
+        function updateButton() {
+            if (deferred.length === 0) {
+                if (wrap) wrap.hidden = true;
+                return;
+            }
+            btn.textContent =
+                deferred.length <= batch
+                    ? 'Alle Bilder anzeigen'
+                    : 'Mehr Bilder laden';
+        }
+
+        btn.addEventListener('click', function () {
+            deferred.splice(0, batch).forEach(activateItem);
+            updateButton();
+        });
+
+        updateButton();
+    })();
+
     /* --- Kontakt: Formular öffnet E-Mail-Programm (mailto) --- */
     /* --- Kursseiten: Kurszeiten an Galerie oder Fließtext, „Mehr anzeigen“ --- */
     function initCourseSchedulePanels() {

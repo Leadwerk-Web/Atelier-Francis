@@ -810,6 +810,49 @@ address {
 .impressions--light .impressions__grid--page {
     max-width: 100%;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 210px;
+    grid-auto-flow: dense;
+    gap: var(--space-sm);
+}
+
+.impressions--light .impressions__grid--page .impressions__item {
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.impressions--light .impressions__grid--page .impressions__item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.impressions--light .impressions__grid--page .impressions__item--tall {
+    grid-row: span 2;
+}
+
+.impressions--light .impressions__grid--page .impressions__item--wide {
+    grid-column: span 2;
+}
+
+.impressions--light .impressions__grid--page.reveal-up,
+.impressions--light .impressions__grid--page .impressions__item.reveal-up {
+    opacity: 1;
+    transform: none;
+}
+
+.impressions--light .impressions__item img {
+    filter: none;
+}
+
+.impressions--light .impressions__item:hover img {
+    filter: none;
+    transform: scale(1.04);
 }
 
 .impressions--light .section-title {
@@ -818,6 +861,20 @@ address {
 
 .impressions--light .impressions__item::after {
     background: linear-gradient(0deg, rgba(42, 39, 37, 0.5) 0%, transparent 52%);
+}
+
+.impressions__item--deferred {
+    display: none;
+}
+
+.impressions__load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xl);
+}
+
+.impressions__load-more-wrap[hidden] {
+    display: none;
 }
 
 /* Galerie + Button-Zeile: kein doppeltes Section-Padding */
@@ -831,7 +888,25 @@ address {
 
 @media (max-width: 1024px) {
     .impressions--light .impressions__grid--page {
-        grid-auto-rows: 220px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+    }
+
+    .impressions--light .impressions__grid--page .impressions__item--wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 540px) {
+    .impressions--light .impressions__grid--page {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+    }
+
+    .impressions--light .impressions__grid--page .impressions__item--wide,
+    .impressions--light .impressions__grid--page .impressions__item--tall {
+        grid-column: span 1;
+        grid-row: span 1;
     }
 }
 
