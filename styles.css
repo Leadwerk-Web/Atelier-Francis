@@ -286,13 +286,13 @@ address {
 }
 
 .nav__logo-img {
-    height: 52px;
+    height: 84px;
     width: auto;
-    transition: opacity var(--transition-fast), filter var(--transition-smooth);
+    transition: opacity var(--transition-fast), filter var(--transition-smooth), height var(--transition-smooth);
 }
 
 .nav--scrolled .nav__logo-img {
-    height: 44px;
+    height: 68px;
     filter: brightness(0) invert(1);
 }
 
