@@ -1,0 +1,14 @@
+/*
+Theme Name: Leadwerk Theme - Atelier Francis
+Theme URI: https://atelierfrancis.de
+Description: WordPress Theme for Atelier Francis Ballettschule.
+Version: 2.0.0
+Author: Leadwerk
+Text Domain: leadwerk-theme
+Requires at least: 6.0
+Requires PHP: 7.4
+*/
+
+body {
+	margin: 0;
+}

@@ -1,0 +1,9 @@
+{
+  "version": "3",
+  "documentation": "Solange pages leer ist, werden EN-Feldinhalte beim Import nicht aus dieser Datei vorbefüllt. Übersetzungen: WP-Admin über Leadwerk WPML Clone (englische Seiten bearbeiten) oder später pages mit source_key (z. B. francis-index-v1) befüllen.",
+  "languages": {
+    "source": "de",
+    "target": "en"
+  },
+  "pages": {}
+}

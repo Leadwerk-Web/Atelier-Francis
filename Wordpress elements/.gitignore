@@ -1,0 +1,7 @@
+# Static HTML export + media (clone without multi‑GB blobs; sync on deploy — see leadwerk_importer/DEPLOY-ASSETS.md)
+leadwerk_importer/source_assets/
+
+# Theme shell image duplicate; runtime URLs use importer/source_assets when plugin is present
+leadwerk_theme/assets/images/*
+!leadwerk_theme/assets/images/.gitkeep
+!leadwerk_theme/assets/images/README.txt

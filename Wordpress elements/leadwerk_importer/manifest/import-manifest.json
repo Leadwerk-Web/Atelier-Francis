@@ -1,0 +1,145 @@
+{
+  "generated_at": "2026-06-25T08:00:57Z",
+  "site_title": "Atelier Francis",
+  "site_tagline": "Ballett · Tanz · Bewegung — Ihre Ballettschule in Ettlingen.",
+  "page_count": 17,
+  "news_count": 0,
+  "pages": [
+    {
+      "source_key": "francis-index-v1",
+      "field_name": "francis_index_sections",
+      "source_file": "index.html",
+      "slug_de": "home",
+      "slug_en": "home-en",
+      "is_front": true
+    },
+    {
+      "source_key": "francis-ueber-uns-v1",
+      "field_name": "francis_ueber_uns_sections",
+      "source_file": "ueber-uns.html",
+      "slug_de": "ueber-uns",
+      "slug_en": "ueber-uns-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-stundenplan-v1",
+      "field_name": "francis_stundenplan_sections",
+      "source_file": "stundenplan.html",
+      "slug_de": "stundenplan",
+      "slug_en": "stundenplan-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kursuebersicht-v1",
+      "field_name": "francis_kursuebersicht_sections",
+      "source_file": "kursuebersicht.html",
+      "slug_de": "kursuebersicht",
+      "slug_en": "kursuebersicht-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-kindertanz-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-kindertanz.html",
+      "slug_de": "kurs-kindertanz",
+      "slug_en": "kurs-kindertanz-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-ballett-kinder-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-ballett-kinder.html",
+      "slug_de": "kurs-ballett-kinder",
+      "slug_en": "kurs-ballett-kinder-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-ballett-erwachsene-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-ballett-erwachsene.html",
+      "slug_de": "kurs-ballett-erwachsene",
+      "slug_en": "kurs-ballett-erwachsene-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-modern-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-modern.html",
+      "slug_de": "kurs-modern",
+      "slug_en": "kurs-modern-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-hip-hop-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-hip-hop.html",
+      "slug_de": "kurs-hip-hop",
+      "slug_en": "kurs-hip-hop-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-pilates-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-pilates.html",
+      "slug_de": "kurs-pilates",
+      "slug_en": "kurs-pilates-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-choreo-fit-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-choreo-fit.html",
+      "slug_de": "kurs-choreo-fit",
+      "slug_en": "kurs-choreo-fit-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kurs-latino-v1",
+      "field_name": "francis_course_sections",
+      "source_file": "kurs-latino.html",
+      "slug_de": "kurs-latino",
+      "slug_en": "kurs-latino-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-aktuelles-v1",
+      "field_name": "francis_aktuelles_sections",
+      "source_file": "aktuelles.html",
+      "slug_de": "aktuelles",
+      "slug_en": "aktuelles-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-eindruecke-v1",
+      "field_name": "francis_eindruecke_sections",
+      "source_file": "eindruecke.html",
+      "slug_de": "eindruecke",
+      "slug_en": "eindruecke-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-kontakt-v1",
+      "field_name": "francis_kontakt_sections",
+      "source_file": "kontakt.html",
+      "slug_de": "kontakt",
+      "slug_en": "kontakt-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-impressum-v1",
+      "field_name": "impressum_page",
+      "source_file": "impressum.html",
+      "slug_de": "impressum",
+      "slug_en": "impressum-en",
+      "is_front": false
+    },
+    {
+      "source_key": "francis-datenschutz-v1",
+      "field_name": "datenschutz_page",
+      "source_file": "datenschutz.html",
+      "slug_de": "datenschutz",
+      "slug_en": "datenschutz-en",
+      "is_front": false
+    }
+  ]
+}
