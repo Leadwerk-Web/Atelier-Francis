@@ -25,6 +25,11 @@ if ( is_file( $leadwerk_exact_render_file ) ) {
 	require_once $leadwerk_exact_render_file;
 }
 
+$leadwerk_social_preview_file = LEADWERK_THEME_DIR . '/inc/francis-social-preview.php';
+if ( is_file( $leadwerk_social_preview_file ) ) {
+	require_once $leadwerk_social_preview_file;
+}
+
 /**
  * Theme setup.
  *
@@ -81,6 +86,46 @@ function leadwerk_theme_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'leadwerk_theme_enqueue_assets' );
+
+/**
+ * Dequeue WPForms default skin — Francis reach-form styles replace it.
+ *
+ * @return void
+ */
+function leadwerk_theme_dequeue_wpforms_default_styles() {
+	wp_dequeue_style( 'wpforms-modern-full' );
+	wp_dequeue_style( 'wpforms-pro-modern-full' );
+	wp_dequeue_style( 'wpforms-full' );
+}
+add_action( 'wp_enqueue_scripts', 'leadwerk_theme_dequeue_wpforms_default_styles', 100 );
+add_action( 'wp_print_styles', 'leadwerk_theme_dequeue_wpforms_default_styles', 100 );
+
+/**
+ * Load Francis WPForms overrides after plugin styles (fallback if dequeue fails).
+ *
+ * @return void
+ */
+function leadwerk_theme_enqueue_wpforms_overrides() {
+	$path = LEADWERK_THEME_DIR . '/css/wpforms-francis.css';
+	if ( ! is_file( $path ) ) {
+		return;
+	}
+
+	$deps = array( 'leadwerk-francis-styles' );
+	foreach ( array( 'wpforms-pro-modern-full', 'wpforms-modern-full', 'wpforms-full' ) as $handle ) {
+		if ( wp_style_is( $handle, 'enqueued' ) || wp_style_is( $handle, 'registered' ) ) {
+			$deps[] = $handle;
+		}
+	}
+
+	wp_enqueue_style(
+		'leadwerk-wpforms-francis',
+		LEADWERK_THEME_URI . '/css/wpforms-francis.css',
+		$deps,
+		LEADWERK_THEME_VERSION
+	);
+}
+add_action( 'wp_enqueue_scripts', 'leadwerk_theme_enqueue_wpforms_overrides', 99999 );
 
 /**
  * Truncate a human-readable SEO title for Yoast pixel/width hints (character-based heuristic).
@@ -1047,7 +1092,7 @@ function leadwerk_theme_get_contact_form_markup() {
 		return $fallback;
 	}
 
-	return $markup;
+	return '<div class="reach-form reach-form--wpforms reveal-up">' . $markup . '</div>';
 }
 
 /**

@@ -1,0 +1,296 @@
+/* WPForms → Francis reach-form (lädt nach WPForms-Standard-CSS) */
+
+.reach-form.reach-form--wpforms,
+.reach-form.reach-form--wpforms .wpforms-container {
+    --wpforms-field-size-input-height: auto;
+    --wpforms-field-border-radius: 0;
+    --wpforms-field-border-style: none;
+    --wpforms-field-border-size: 0;
+    --wpforms-field-background-color: transparent;
+    --wpforms-field-border-color: var(--gray-100);
+    --wpforms-field-text-color: var(--gray-600);
+    --wpforms-label-color: var(--gold);
+    --wpforms-label-sublabel-color: var(--gray-400);
+    --wpforms-button-border-radius: 0;
+    --wpforms-container-padding: 0;
+    --wpforms-container-border-style: none;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container,
+.reach-form.reach-form--wpforms .wpforms-form,
+.reach-form.reach-form--wpforms .wpforms-field-container {
+    display: contents;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container {
+    margin: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-text,
+.reach-form.reach-form--wpforms .wpforms-field-email {
+    grid-column: auto;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-textarea,
+.reach-form.reach-form--wpforms .wpforms-field-checkbox,
+.reach-form.reach-form--wpforms .wpforms-submit-container {
+    grid-column: 1 / -1;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field-label,
+.reach-form.reach-form--wpforms .wpforms-field-checkbox legend.wpforms-field-label {
+    font-family: var(--font-body) !important;
+    font-size: var(--fs-label) !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: var(--gold) !important;
+    margin: 0 0 var(--space-xs) !important;
+    float: none !important;
+    display: block !important;
+    line-height: 1.4 !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-required-label {
+    color: var(--gold) !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input[type="text"],
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input[type="email"],
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input.wpforms-field-medium,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea.wpforms-field-medium {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--fs-body) !important;
+    font-weight: 300 !important;
+    color: var(--gray-600) !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--gray-100) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: var(--space-sm) 0 !important;
+    min-height: 0 !important;
+    transition: border-color var(--transition-fast);
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea.wpforms-field-medium {
+    resize: vertical;
+    min-height: 120px !important;
+    line-height: 1.6 !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input[type="text"]:focus,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input[type="email"]:focus,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea:focus,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input.wpforms-field-medium:focus,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea.wpforms-field-medium:focus {
+    outline: none !important;
+    border: none !important;
+    border-bottom: 1px solid var(--gold) !important;
+    box-shadow: none !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field input::placeholder,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-field textarea::placeholder {
+    color: transparent !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox fieldset {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox,
+.reach-form.reach-form--wpforms .wpforms-field-checkbox .wpforms-container {
+    --wpforms-field-border-style: solid;
+    --wpforms-field-border-size: 1px;
+    --wpforms-field-border-color: var(--gray-400);
+    --wpforms-field-background-color: var(--white-pure);
+    --wpforms-field-size-checkbox-size: 20px;
+    --wpforms-button-background-color: var(--gold);
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox li {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: var(--space-sm) !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-label-inline {
+    font-size: var(--fs-small) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--gray-400) !important;
+    line-height: 1.6 !important;
+    cursor: pointer;
+    flex: 1;
+    padding-inline-start: 0 !important;
+    display: block !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-label-inline a {
+    color: var(--gold) !important;
+    font-weight: 400 !important;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--transition-fast);
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-label-inline a:hover,
+.reach-form.reach-form--wpforms .wpforms-field-label-inline a:focus {
+    color: var(--gold-light) !important;
+    outline: none;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"],
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    margin: 0.1rem 0 0 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    position: relative !important;
+    display: inline-block !important;
+    flex-shrink: 0;
+    vertical-align: top !important;
+    cursor: pointer;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"]::before,
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"]::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+    box-sizing: border-box !important;
+    border: 1px solid var(--gray-400) !important;
+    background-color: var(--white-pure) !important;
+    border-radius: 2px !important;
+    cursor: pointer;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"]:checked::before,
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"]:checked::before {
+    border-color: var(--gold) !important;
+    background-color: var(--gold) !important;
+    box-shadow: none !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"]::after,
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"]::after {
+    content: '' !important;
+    position: absolute !important;
+    left: 7px !important;
+    top: 3px !important;
+    width: 5px !important;
+    height: 10px !important;
+    border: none !important;
+    border-right: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
+    background: transparent !important;
+    transform: rotate(45deg) !important;
+    box-sizing: border-box !important;
+    cursor: pointer;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"]:checked::after,
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"]:checked::after {
+    border-right-color: var(--bg-black) !important;
+    border-bottom-color: var(--bg-black) !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-field-checkbox input[type="checkbox"]:focus::before,
+.reach-form.reach-form--wpforms div.wpforms-container-full input[type="checkbox"]:focus::before {
+    outline: 2px solid rgba(196, 165, 116, 0.45);
+    outline-offset: 1px;
+}
+
+.reach-form.reach-form--wpforms .wpforms-submit-container {
+    margin: var(--space-sm) 0 0 !important;
+    padding: 0 !important;
+    clear: none !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-submit,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form button.wpforms-submit {
+    display: inline-block !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--fs-label) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    padding: 15px 20px !important;
+    border: 1px solid var(--gold) !important;
+    background: var(--gold) !important;
+    color: var(--bg-black) !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    line-height: 1.2 !important;
+    width: auto !important;
+    height: auto !important;
+    transition: color var(--transition-smooth), border-color var(--transition-smooth),
+                box-shadow var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-submit:hover,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-submit:focus,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form button.wpforms-submit:hover,
+.reach-form.reach-form--wpforms .wpforms-container .wpforms-form button.wpforms-submit:focus {
+    background: var(--gold) !important;
+    color: var(--bg-black) !important;
+    border-color: var(--gold-light) !important;
+    box-shadow: 0 4px 24px var(--gold-glow) !important;
+    transform: translateY(-1px);
+    outline: none !important;
+}
+
+.reach-form.reach-form--wpforms .wpforms-submit-spinner {
+    margin-left: var(--space-sm);
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .reach-form.reach-form--wpforms .wpforms-container .wpforms-form .wpforms-submit,
+    .reach-form.reach-form--wpforms .wpforms-container .wpforms-form button.wpforms-submit {
+        width: 100% !important;
+        max-width: 320px;
+    }
+}
