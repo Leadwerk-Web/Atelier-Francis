@@ -664,4 +664,42 @@
             window.location.href = href;
         });
     }
+
+    /* --- FAQ: Themen-Tabs (ohne JS werden alle Fragen untereinander gezeigt) --- */
+    var faq = document.querySelector('.faq');
+    if (faq) {
+        var faqTabs = faq.querySelectorAll('[data-faq-tab]');
+        var faqPanels = faq.querySelectorAll('[data-faq-panel]');
+
+        function showFaqPanel(key, focusTab) {
+            faqTabs.forEach(function (tab) {
+                var active = tab.getAttribute('data-faq-tab') === key;
+                tab.classList.toggle('faq__tab--active', active);
+                tab.setAttribute('aria-selected', active ? 'true' : 'false');
+                tab.tabIndex = active ? 0 : -1;
+                if (active && focusTab) tab.focus();
+            });
+            faqPanels.forEach(function (panel) {
+                panel.hidden = panel.getAttribute('data-faq-panel') !== key;
+            });
+        }
+
+        faq.classList.add('faq--js');
+        showFaqPanel(faqTabs[0].getAttribute('data-faq-tab'), false);
+
+        faqTabs.forEach(function (tab, i) {
+            tab.addEventListener('click', function () {
+                showFaqPanel(tab.getAttribute('data-faq-tab'), false);
+            });
+            tab.addEventListener('keydown', function (e) {
+                var next = null;
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = faqTabs[(i + 1) % faqTabs.length];
+                if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = faqTabs[(i - 1 + faqTabs.length) % faqTabs.length];
+                if (next) {
+                    e.preventDefault();
+                    showFaqPanel(next.getAttribute('data-faq-tab'), true);
+                }
+            });
+        });
+    }
 })();

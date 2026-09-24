@@ -3979,3 +3979,244 @@ address {
         margin-top: var(--space-sm);
     }
 }
+
+/* ============================================
+   FAQ (Über uns)
+   ============================================ */
+.faq {
+    background: var(--bg-cream);
+    padding: var(--section-pad) 0;
+}
+
+.faq__inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.faq__intro {
+    position: sticky;
+    top: 120px;
+}
+
+.faq__text {
+    font-size: var(--fs-body);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--gray-400);
+    margin-bottom: var(--space-lg);
+}
+
+.faq__text a {
+    color: var(--gray-600);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+}
+
+.faq__text a:hover {
+    color: var(--gold);
+}
+
+.faq__tabs {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--gray-100);
+}
+
+.faq__tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px var(--space-md);
+    margin-left: -1px;
+    background: none;
+    border: 0;
+    border-left: 2px solid transparent;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--gray-400);
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.faq__tab:hover {
+    color: var(--gray-600);
+}
+
+.faq__tab--active {
+    color: var(--gray-600);
+    border-left-color: var(--gold);
+}
+
+.faq__tab:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.faq__tab-count {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    color: var(--gold);
+}
+
+/* Ohne JS: alle Themen untereinander; mit JS nur das aktive */
+.faq__panel + .faq__panel {
+    margin-top: var(--space-xl);
+}
+
+.faq__panel-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--gray-600);
+    margin-bottom: var(--space-sm);
+}
+
+.faq--js .faq__panel {
+    margin-top: 0;
+}
+
+.faq--js .faq__panel[hidden] {
+    display: none;
+}
+
+.faq--js .faq__panel-title {
+    display: none;
+}
+
+.faq--js .faq__panel:not([hidden]) {
+    animation: faqFade 0.4s ease;
+}
+
+@keyframes faqFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+.faq__item {
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.faq__item:first-of-type {
+    border-top: 1px solid var(--gray-100);
+}
+
+.faq__question {
+    position: relative;
+    display: block;
+    padding: 22px 48px 22px 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--gray-600);
+    list-style: none;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.faq__question::before,
+.faq__question::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 14px;
+    height: 1px;
+    background: var(--gold);
+    transition: transform var(--transition-fast);
+}
+
+.faq__question::after {
+    transform: rotate(90deg);
+}
+
+.faq__item[open] > .faq__question::after {
+    transform: rotate(0deg);
+}
+
+.faq__question:hover,
+.faq__item[open] > .faq__question {
+    color: var(--pink);
+}
+
+.faq__question:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.faq__answer {
+    padding: 0 48px 24px 0;
+}
+
+.faq__answer p {
+    font-size: var(--fs-body);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--gray-500);
+}
+
+.faq__answer a {
+    color: var(--pink);
+}
+
+@media (max-width: 1024px) {
+    .faq__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .faq__intro {
+        position: static;
+    }
+
+    .faq__tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        border-left: 0;
+    }
+
+    .faq__tab {
+        margin-left: 0;
+        padding: 10px 16px;
+        border: 1px solid var(--gray-200);
+        border-radius: 999px;
+        font-size: var(--fs-label);
+    }
+
+    .faq__tab--active {
+        background: var(--gray-600);
+        border-color: var(--gray-600);
+        color: var(--white);
+    }
+}
+
+@media (max-width: 768px) {
+    .faq__inner {
+        padding: 0 var(--space-md);
+    }
+
+    .faq__question {
+        padding-right: 36px;
+    }
+
+    .faq__answer {
+        padding-right: 0;
+    }
+}
